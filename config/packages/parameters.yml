@@ -1,0 +1,6 @@
+parameters:
+  db_host: docker-db
+  db_name: eactivos
+  db_port: 3306
+  db_user: root
+  db_password: 1234

@@ -1,0 +1,67 @@
+meta_title: 'Eactivos tecnical test'
+
+common:
+  here: 'aquí'
+
+header:
+  login: 'Iniciar sesión'
+  logout: 'Cerrar sesión'
+  home: 'Home'
+  auctions: 'Subastas'
+  my_bids: 'Pujas realizadas'
+
+footer:
+  media: 'Información adiccional'
+  personal_data: 'Información personal'
+  phone: '635 838 620'
+  mail: 'paco8894@gmail.com'
+
+home:
+  title: 'Prueba técnica para Eactivos'
+  last_auctions: 'Últimas subastas'
+  show_all_auctions: 'Ver todas'
+
+auction_list:
+  title: 'Listado de subastas'
+  available_at: 'Fecha de inicio:'
+  expired_at: 'Disponible hasta:'
+
+lots_list:
+  title: 'Lotes incluidos en %auction%'
+  price: 'Precio:'
+  start_price: 'Precio de salida:'
+
+lot_view:
+  price: "Precio del lote:"
+  last_bid: "Mayor puja:"
+  expired_at: "Disponible hasta:"
+  description: "Descripción del lote"
+  included_products: "Productos incluídos"
+  make_bid: "Realizar puja"
+
+form:
+  label:
+    email: 'Email'
+    repeat_email: 'Repite email'
+    password: 'Contraseña'
+    repeat_password: 'Repite contreseña'
+  errors:
+    email_mismatch: 'Los emails no coinciden'
+    password_mismatch: 'Las contraseñas no coinciden'
+
+
+registration:
+  title: 'Regístrate como usuario'
+  redirect_to_login: 'Si ya tienes cuenta, inicia sesión'
+  submit: 'Confirmar registro'
+
+login:
+  title: 'Inicia sesión con tu cuenta'
+  redirect_to_register: 'Si no tienes una cuenta, creala'
+  submit: 'Iniciar sesión'
+  remember_me: 'Mantener sesión iniciada'
+
+confirmation:
+  title: 'Cuenta creada correctamente'
+  logged_as: 'Bienvenido %user%'
+  go_home: 'Volver al inicio'

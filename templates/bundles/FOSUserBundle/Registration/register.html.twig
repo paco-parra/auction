@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+<section class="page-section text-center register page-no-header">
+    <div class="container">
+        <h1 class="h3 mb-3 font-weight-normal">{{ 'registration.title'|trans }}</h1>
+        <p>{{ 'registration.redirect_to_login'|trans }} <a href="{{ url('fos_user_security_login') }}">{{ 'common.here'|trans }}</a></p>
+        {% include "bundles/FOSUserBundle/Registration/register_content.html.twig" %}
+    </div>
+</section>
+{% endblock content %}

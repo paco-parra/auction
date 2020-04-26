@@ -1,0 +1,22 @@
+.form-user {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-user .checkbox {
+    font-weight: 400;
+}
+.form-user .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-user .form-control:focus {
+    z-index: 2;
+}
+.form-user input[type="password"], .form-user input[type="email"] {
+    margin-bottom: 10px;
+}

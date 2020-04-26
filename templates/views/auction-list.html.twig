@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <h1 class="masthead-heading text-uppercase mb-0">{{ 'auction_list.title'|trans }}</h1>
+        </div>
+    </header>
+
+    <section class="page-section portfolio">
+        <div class="container">
+            <div class="row">
+                {% for auction in auctions %}
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <a href="{{ url('lots_list', {'id': auction.id}) }}">
+                            <div class="portfolio-item mx-auto">
+                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                    <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <h3 class="list-auction-title bg-secondary text-center text-uppercase text-white">{{ auction.name }}</h3>
+                                <img class="img-fluid" src="{{ asset('images/cabin.png') }}" alt="{{ auction.name }}" />
+                                <div class="list-auction-title bg-secondary text-center text-white">
+                                    {% if date() < auction.availableAt %}
+                                        <h4>{{ 'auction_list.available_at'|trans }} {{ auction.availableAt|date('d/m/Y H:i:s') }}</h4>
+                                    {% else %}
+                                        <h4>{{ 'auction_list.expired_at'|trans }} {{ auction.expiredAt|date('d/m/Y H:i:s') }}</h4>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}

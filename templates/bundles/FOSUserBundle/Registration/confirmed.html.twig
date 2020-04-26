@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <section class="masthead bg-info text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <h1 class="masthead-heading text-uppercase mb-0">{{ 'confirmation.logged_as'|trans({ '%user%': user.email }) }}</h1>
+
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <p class="masthead-subheading font-weight-light mb-0"><a class="text-white" href="{{ url('home') }}">{{ 'confirmation.go_home'|trans }}</a></p>
+        </div>
+    </section>
+{% endblock content %}

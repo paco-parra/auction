@@ -1,0 +1,9 @@
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form-user'}}) }}
+    {{ form_widget(form.email.first, {'attr': {'placeholder': 'form.label.email'|trans, 'class': 'form-control' }}) }}
+    {{ form_widget(form.email.second, {'attr': {'placeholder': 'form.label.repeat_email'|trans, 'class': 'form-control' }}) }}
+    {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'form.label.password'|trans, 'class': 'form-control' }}) }}
+    {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'form.label.repeat_password'|trans, 'class': 'form-control' }}) }}
+    <div>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}
