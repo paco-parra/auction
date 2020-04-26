@@ -1,16 +1,20 @@
 Add 127.0.0.1       local.eactivos.com to etc/hosts
 
+Instalar vendors 
+composer install
+
 Iniciar Docker
 cd docker
 docker-compose up -d
 
-Iniciar la aplicación
-cd docker
-//access php cli container to create schema and load fixtures
-docker exec -it docker_docker-php-cli_1 bash 
-cd /var/www/
-bin/console doctrine:schema:update --force
-bin/console doctrine:fixtures:load
+//Run application
+
+//Build schema && run fixtures
+docker-compose run --rm docker-php-cli /var/www/bin/console doctrine:schema:update --force
+docker-compose run --rm docker-php-cli /var/www/bin/console doctrine:fixtures:load
+
+//Run yarn build to compile assets
+docker-compose run --rm docker-encore yarn build 
 
 
 Register user

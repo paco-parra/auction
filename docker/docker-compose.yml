@@ -5,36 +5,25 @@ version: '3'
 networks:
   web-network:
 
-# start the services section
 services:
-  # define the name of our service
-  # corresponds to the "--name" parameter
   docker-php-cli:
     # define the directory where the build should happened,
     # i.e. where the Dockerfile of the service is located
     # all paths are relative to the location of docker-compose.yml
     build:
       context: ./php-cli/
-      dockerfile: Dockerfile
-
-    # reserve a tty - otherwise the container shuts down immediately
-    # corresponds to the "-i" flag
     tty: true
     # mount the app directory of the host to /var/www in the container
-    # corresponds to the "-v" option
     volumes:
       - ../:/var/www
       - ~/.bash_history:/root/.bash_history
     # connect to the network
-    # corresponds to the "--network" option
     networks:
       - web-network
 
   docker-nginx:
     build:
       context: ./nginx
-    # defines the port mapping
-    # corresponds to the "-p" flag
     ports:
       - "8080:80"
     tty: true
@@ -62,21 +51,19 @@ services:
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: '1234'
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - '6666:3306'
-    # Where our data will be persisted
     volumes:
       - ../app/docker-volume/mysql:/var/lib/mysql
     networks:
       - web-network
 
-  docker-nodejs:
+  docker-encore:
     build:
-      context: ./nodejs/
-      dockerfile: Dockerfile
-
+      context: ./encore
     volumes:
       - ../:/var/www
-
+    ports:
+      - "${DEV_SERVER_PORT:-8088}:8088"
+    command: ["yarn", "dev-server", "--host=0.0.0.0"]
     networks:
       - web-network
