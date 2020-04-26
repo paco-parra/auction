@@ -29,3 +29,8 @@ yarn-error.log
 
 ### Docker volume ###
 /app/docker-volume/
+### Docker volume ###
+
+### PHP Storm files ###
+/.idea/
+### PHP Storm files ###
