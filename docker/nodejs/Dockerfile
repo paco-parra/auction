@@ -1,2 +1,6 @@
 FROM node:6.7.0
-RUN npm install -g yarn
+
+WORKDIR /var/www
+
+RUN npm install -g yarn \
+  && yarn encore dev
