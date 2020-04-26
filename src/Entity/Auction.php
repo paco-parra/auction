@@ -64,7 +64,7 @@ class Auction implements AuctionInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName():? string
     {
         return $this->name;
     }

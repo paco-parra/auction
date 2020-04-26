@@ -1,5 +1,6 @@
 imports:
     - { resource: manager.yml }
+    - { resource: admin.yml }
 
 services:
     # default configuration for services in *this* file

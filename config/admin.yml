@@ -1,0 +1,24 @@
+services:
+  admin.auction:
+    class: App\Admin\AuctionAdmin
+    arguments: [~, App\Entity\Auction, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: Subastas, group: Subastas }
+
+  lots.admin:
+    class: App\Admin\LotsAdmin
+    arguments: [~, App\Entity\Lots, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: Lotes, group: Subastas }
+
+  products.admin:
+    class: App\Admin\ProductsAdmin
+    arguments: [~, App\Entity\Products, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: Productos, group: Subastas }
+
+  user.admin:
+    class: App\Admin\UserAdmin
+    arguments: [~, App\Entity\User, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: Usuarios, group: Usuarios }

@@ -83,7 +83,7 @@ class Lots implements LotsInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName():? string
     {
         return $this->name;
     }
@@ -99,7 +99,7 @@ class Lots implements LotsInterface
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription():? string
     {
         return $this->description;
     }
@@ -115,7 +115,7 @@ class Lots implements LotsInterface
     /**
      * @return int
      */
-    public function getPrice(): int
+    public function getPrice():? int
     {
         return $this->price;
     }
@@ -131,7 +131,7 @@ class Lots implements LotsInterface
     /**
      * @return int
      */
-    public function getInitialPrice(): int
+    public function getInitialPrice():? int
     {
         return $this->initialPrice;
     }
@@ -179,7 +179,7 @@ class Lots implements LotsInterface
     /**
      * @return mixed
      */
-    public function getAuction(): AuctionInterface
+    public function getAuction():? AuctionInterface
     {
         return $this->auction;
     }

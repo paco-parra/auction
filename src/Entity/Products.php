@@ -57,7 +57,7 @@ class Products implements ProductInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName():? string
     {
         return $this->name;
     }
@@ -73,7 +73,7 @@ class Products implements ProductInterface
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getImage():? string
     {
         return $this->image;
     }
@@ -89,7 +89,7 @@ class Products implements ProductInterface
     /**
      * @return mixed
      */
-    public function getLot(): LotsInterface
+    public function getLot():? LotsInterface
     {
         return $this->lot;
     }
