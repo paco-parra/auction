@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Auction;
-use App\Manager\BaseManager;
 use App\Model\Interfaces\AuctionInterface;
 use App\Model\Interfaces\LotsInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -14,20 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-//    public $auctionManager;
-//
-//    public function __construct(AuctionManager $auctionManager)
-//    {
-//        $this->auctionManager = $auctionManager;
-//    }
-
     /**
      * @Route("/", name="home")
      */
-    public function indexAction(BaseManager $baseManager)
+    public function indexAction()
     {
-//        $service = $this->get(BidsService::class);
-//        $manager = $this->get('app.auction.manager');
         $auctionRepository = $this->getDoctrine()->getRepository(Auction::class);
         $auctions = $auctionRepository->findLatestAuction();
 
