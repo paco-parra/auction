@@ -3,29 +3,25 @@
 {% block content %}
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
-            <h1 class="masthead-heading text-uppercase mb-0">{{ 'lots_list.title'|trans({'%auction%': auctionName}) }}</h1>
+            <h1 class="masthead-heading text-uppercase mb-0">{{ 'my_bids_view.title'|trans }}</h1>
         </div>
     </header>
 
     <section class="page-section portfolio">
         <div class="container">
             <div class="row">
-                {% for lot in lots %}
+                {% for bid in bids %}
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <a href="{{ url('lot_view', {'id': lot.id}) }}">
+                        <a href="{{ url('lot_view', {'id': bid.lot.id}) }}">
                             <div class="portfolio-item mx-auto">
                                 <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                     <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <h3 class="list-auction-title bg-secondary text-center text-uppercase text-white">{{ lot.name }}</h3>
+                                <h3 class="list-auction-title bg-secondary text-center text-uppercase text-white">{{ bid.lot.name }}</h3>
                                 <img class="img-fluid" src=" https://via.placeholder.com/600x600.png?text=Lote+Placeholder" alt="" />
                                 <div class="list-auction-title bg-secondary text-center text-white text-uppercase lots-prices">
-                                    {% if lot.bids|length > 0 %}
-                                        <p>{{ 'lots_list.last_bid'|trans }} {{ lot.getLastBid().offer|number_format(0, ',', '.') }}€</p>
-                                    {% else %}
-                                        <p>{{ 'lots_list.start_price'|trans }} {{ lot.initialPrice|number_format(0, ',', '.') }}€</p>
-                                    {% endif %}
-                                    <p>{{ 'lots_list.price'|trans }} {{ lot.price|number_format(0, ',', '.') }}€</p>
+                                    <p>{{ 'my_bids_view.my_bid'|trans }} {{ bid.offer|number_format(0, ',', '.') }}€</p>
+                                    <p>{{ 'lots_list.price'|trans }} {{ bid.lot.price|number_format(0, ',', '.') }}€</p>
                                 </div>
                             </div>
                         </a>

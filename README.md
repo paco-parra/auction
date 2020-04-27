@@ -1,6 +1,12 @@
-Add 127.0.0.1       local.eactivos.com to etc/hosts
+# INSTALLATION 
 
-Instalar vendors 
+Add to etc/hosts
+127.0.0.1 local.eactivos.com
+
+##Git repository
+
+
+Install vendors 
 composer install
 
 Iniciar Docker
@@ -16,6 +22,8 @@ docker-compose run --rm docker-php-cli /var/www/bin/console doctrine:fixtures:lo
 //Run yarn build to compile assets
 docker-compose run --rm docker-encore yarn build 
 
+//Install assets for sonata admin
+bin/console assets:install 
 
 Register user
 curl -X POST \
@@ -27,7 +35,7 @@ curl -X POST \
     "email":"test@test.com"
   }' 
 
-Obtener Token de usuario administrador (Necesario para obtener información de la API)
+Obtain token of administrator user (Necessary to obtain information from API)
 curl -X POST \
   http://local.eactivos.com:8080/api/auth/login \
   -H 'Content-Type: application/json' \
@@ -35,3 +43,21 @@ curl -X POST \
     "username": "admin@admin.com",
     "password": "12345"
 }'
+
+Obtain all auctions, lots and bids
+curl -X GET \
+  http://local.eactivos.com:8080/api/v1/auctions/all \
+  -H 'Authorization: Bearer {JWT_EY}' \
+  -H 'Content-Type: application/json' \
+  
+Obtain all users and their bids
+  curl -X GET \
+    http://local.eactivos.com:8080/api/v1/users/all \
+    -H 'Authorization: Bearer {JWT_EY}' \
+    -H 'Content-Type: application/json' \
+
+Obtain all bids made by specific user
+curl -X GET \
+  http://local.eactivos.com:8080/api/v1/user/{user_id}/bids \
+  -H 'Authorization: Bearer {JWT_EY}' \
+  -H 'Content-Type: application/json' \

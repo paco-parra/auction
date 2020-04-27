@@ -7,6 +7,6 @@ fos_user:
     sender_name: "test@domain.com"
   registration:
     form:
-      type: App\Form\RegistrationType
+      type: App\Form\Type\RegistrationType
     confirmation:
       enabled: false

@@ -3,14 +3,12 @@
 namespace App\Controller\Api;
 
 use App\Entity\Auction;
+use App\Entity\Bids;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -35,7 +33,7 @@ class ApiController extends AbstractController
             $code = 200;
             $error = false;
 
-            $users = $repository->findAll();
+            $users = $repository->findAllUsersAsArray();
 
             if (is_null($users)) {
                 $users = [];
@@ -72,7 +70,7 @@ class ApiController extends AbstractController
             $code = 200;
             $error = false;
 
-            $auctions = $repository->findAll();
+            $auctions = $repository->findAllAuctionArray();
 
             if (is_null($auctions)) {
                 $auctions = [];
@@ -90,24 +88,53 @@ class ApiController extends AbstractController
             'data' => $code == 200 ? $auctions : $message,
         ];
 
-        return new JsonResponse($this->serialize($response, "json"));
+        return new JsonResponse($this->serialize($response));
     }
 
-    private function serialize(array $response)
-    {
-        $encoders = [new JsonEncoder()];
+    /**
+     * @Route("/user/{id}/bids", name="api_bids_by_user", methods={"GET"})
+     * @param User $user
+     * @return JsonResponse
+     */
+    public function getBidsByUser(User $user) {
 
-        $defaultContext = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                return $object->getName();
-            },
+        $this->denyAccessUnlessGranted('view', $this->getUser());
+
+        $repository = $this->getDoctrine()->getRepository(Bids::class);
+        $message = "";
+        $bids = [];
+
+        try {
+            $code = 200;
+            $error = false;
+
+            $bids = $repository->findBidsByUser($user);
+
+            if (is_null($bids)) {
+                $bids = [];
+            }
+
+        } catch (\Exception $ex) {
+            $code = 500;
+            $error = true;
+            $message = "An error has occurred trying to get all Auctions - Error: {$ex->getMessage()}";
+        }
+
+        $response = [
+            'code' => $code,
+            'error' => $error,
+            'data' => $code == 200 ? $bids : $message,
         ];
 
-        $normalizers = [new ObjectNormalizer(null, null, null, null, null, null, $defaultContext)];
+        return new JsonResponse($this->serialize($response));
+    }
 
+    protected function serialize($data)
+    {
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
-        $json = $serializer->serialize($response, 'json');
-
+        $json = $serializer->serialize($data, 'json');
         return $json;
     }
 }

@@ -30,10 +30,14 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <p class="h1 mb-3">{{ lot.name }}</p>
-                    <p class="h2 mb-3">{{ 'lot_view.price'|trans }}{{ lot.price|number_format(0, ',', '.') }}€</p>
-                    <p class="h3 mb-3">{{ 'lot_view.last_bid'|trans }}{{ lot.price|number_format(0, ',', '.') }}€</p>
+                    <p class="h2 mb-3">{{ 'lot_view.price'|trans }} {{ lot.price|number_format(0, ',', '.') }}€</p>
+                    {% if lot.bids|length > 0 %}
+                        <p class="h3 mb-3">{{ 'lot_view.last_bid'|trans }} {{ lot.getLastBid().offer|number_format(0, ',', '.') }}€</p>
+                    {% else %}
+                        <p class="h3 mb-3">{{ 'lots_list.start_price'|trans }} {{ lot.initialPrice|number_format(0, ',', '.') }}€</p>
+                    {% endif %}
                     <p class="h5 mb-3">{{ 'lot_view.expired_at'|trans }} {{ lot.auction.expiredAt|date('d/m/Y H:i:s') }}</p>
-                    <button class="btn btn-lg btn-primary">{{ 'lot_view.make_bid'|trans }}</button>
+                    <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#bidsModal">{{ 'lot_view.make_bid'|trans }}</button>
                 </div>
             </div>
             <div class="row pt-5">
@@ -77,4 +81,51 @@
             </div>
         </div>
     </section>
+
+    {% include 'modules/modals/new-bid.modal.html.twig' %}
+
 {% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            $('#bid_save').on('click', function(event) {
+                event.preventDefault();
+                var form = $("form[name=bid]").serialize();
+                $.ajax({
+                    url: "{{ url('save_bid')}}",
+                    type: "POST",
+                    data: form,
+                    success: function(data) {
+                        $('#bids-error').html('');
+                        switch (data.result) {
+                            case 0:
+                                $.each( data.data, function( key, value ) {
+                                    $('#bids-error').append("<div class='alert alert-warning' role='alert'>" + value + "</div>");
+                                });
+                                break;
+                            case 401:
+                                $('#bids-error').append("<div class='alert alert-warning' role='alert'>{{ 'modal.bids.unauthorized'|trans }}</div>");
+                                break;
+                            default:
+                                $('#bid-form').html('<h4 class="alert-heading">{{ 'modal.bids.bid_done'|trans }}</h4>');
+                                break;
+
+                        }
+                        if(data.result === 0) {
+
+
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown)
+                    {
+                        // alert('Error: ' +  errorThrown);
+                    }
+                }, "json");
+            });
+        });
+    </script>
+{#    bid_save#}
+{% endblock %}

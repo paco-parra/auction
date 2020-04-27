@@ -1,0 +1,10 @@
+App\Entity\Bids:
+  constraints:
+    - App\Validator\Constraints\Bids: ~
+  properties:
+    offer:
+      - GreaterThan:
+          value: 0
+          message: 'bids.value_greater_than_0'
+      - NotNull:
+          message: 'bids.not_blank'

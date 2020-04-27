@@ -7,6 +7,7 @@ use App\Model\Interfaces\AuctionInterface;
 use App\Model\Interfaces\BidsInterface;
 use App\Model\Interfaces\LotsInterface;
 use App\Model\Interfaces\ProductInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -69,7 +70,8 @@ class Lots implements LotsInterface
 
     public function __construct()
     {
-        $this->products = [];
+        $this->products = new ArrayCollection();;
+        $this->bids = new ArrayCollection();
         $this->initialPrice = 0;
     }
 
@@ -228,5 +230,10 @@ class Lots implements LotsInterface
         if (!$this->bids->contains($bids)) {
             $this->bids->removeElement($bids);
         }
+    }
+
+    public function getLastBid()
+    {
+        return $this->bids->last();
     }
 }

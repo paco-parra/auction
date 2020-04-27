@@ -30,6 +30,7 @@ lots_list:
   title: 'Lotes incluidos en %auction%'
   price: 'Precio:'
   start_price: 'Precio de salida:'
+  last_bid: 'Última puja:'
 
 lot_view:
   price: "Precio del lote:"
@@ -38,6 +39,10 @@ lot_view:
   description: "Descripción del lote"
   included_products: "Productos incluídos"
   make_bid: "Realizar puja"
+
+my_bids_view:
+  title: 'Pujas realizadas'
+  my_bid: 'Mi puja:'
 
 form:
   label:
@@ -65,3 +70,10 @@ confirmation:
   title: 'Cuenta creada correctamente'
   logged_as: 'Bienvenido %user%'
   go_home: 'Volver al inicio'
+
+modal:
+  close: 'Cerrar'
+  bids:
+    title: 'Realizar una puja'
+    unauthorized: 'Petición no autorizada'
+    bid_done: 'Puja realizada correctamente'

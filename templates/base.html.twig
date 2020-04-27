@@ -20,7 +20,7 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('auctions_list') }}">{{ 'header.auctions'|trans }}</a></li>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">{{ 'header.my_bids'|trans }}</a></li>
+                                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('my_bids') }}">{{ 'header.my_bids'|trans }}</a></li>
                                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('fos_user_security_logout') }}">{{ 'header.logout'|trans }}</a></li>
                             {% else %}
                                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('fos_user_security_login') }}">{{ 'header.login'|trans }}</a></li>

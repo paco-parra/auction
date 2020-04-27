@@ -25,12 +25,6 @@ services:
         tags: ['controller.service_arguments']
 
     app.form.registration:
-        class: App\Form\RegistrationType
+        class: App\Form\Type\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
-
-    App\Services\BidsService:
-        public: true
-        class: App\Services\BidsService
-
-    app.bids.service: '@App\Services\BidsService'

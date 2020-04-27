@@ -3,7 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use ApiBundle\Entity\CounterofferLines;
+use ApiBundle\Form\Counteroffer\NewCounterofferType;
 use App\Entity\Auction;
+use App\Entity\Bids;
+use App\Form\Type\BidType;
 use App\Model\Interfaces\AuctionInterface;
 use App\Model\Interfaces\LotsInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -65,6 +69,17 @@ class DefaultController extends AbstractController
     {
         return $this->render('views/lots-view.html.twig', [
             'lot' => $lot,
+        ]);
+    }
+
+    /**
+     * @Route("/my-bids", name="my_bids")
+     * @return Response
+     */
+    public function myBidsViewAction()
+    {
+        return $this->render('views/my-bids.html.twig', [
+            'bids' => $this->getUser()->getBids(),
         ]);
     }
 }

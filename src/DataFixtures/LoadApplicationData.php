@@ -101,11 +101,11 @@ class LoadApplicationData extends Fixture implements ContainerAwareInterface
 
     private function loadProductsData()
     {
-        for ($i=0; $i < 40; $i++) {
+        for ($i=0; $i < 200; $i++) {
             $product = $this->baseManager->create(Products::class);
 
             $product->setName(sprintf('Producto %s', $i));
-            $product->setImage(' https://via.placeholder.com/600');
+            $product->setImage(' https://via.placeholder.com/600x600.png?text=Producto+Placeholder');
             $product->setLot($this->getReference(sprintf('lot-%s', rand(0,9))));
 
             $this->baseManager->save($product);

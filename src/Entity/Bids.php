@@ -47,4 +47,52 @@ class Bids implements BidsInterface
     {
         return $this->id;
     }
+
+    /**
+     * @return int
+     */
+    public function getOffer():? int
+    {
+        return $this->offer;
+    }
+
+    /**
+     * @param int $offer
+     */
+    public function setOffer(int $offer): void
+    {
+        $this->offer = $offer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLot()
+    {
+        return $this->lot;
+    }
+
+    /**
+     * @param mixed $lot
+     */
+    public function setLot($lot): void
+    {
+        $this->lot = $lot;
+    }
 }

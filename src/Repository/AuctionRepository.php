@@ -26,4 +26,41 @@ class AuctionRepository extends EntityRepository
         }
         return $qb->getQuery()->getResult();
     }
+
+    public function findAllAuctionArray()
+    {
+        $qb = $this->findNonExpiredAuctions(true);
+        $qb->select(
+            'auction.name as auctionName, auction.expiredAt, auction.availableAt, 
+            lots.name as lotName, lots.price as lotPrice, lots.description as lotDescription,
+            product.name as productName'
+        )
+            ->leftJoin('auction.lots', 'lots')
+            ->leftJoin('lots.products', 'product');
+
+        $resultQb = $qb->getQuery()->getArrayResult();
+
+        $result = [];
+        foreach ($resultQb as $item) {
+            if(!key_exists($item['auctionName'], $result)) {
+                $result[$item['auctionName']] = [
+                    'expiredAt' => $item['expiredAt'],
+                    'availableAt' => $item['availableAt'],
+                    'lots' => [],
+                ];
+            }
+            if(!key_exists($item['lotName'], $result[$item['auctionName']]['lots'])) {
+                $result[$item['auctionName']]['lots'][$item['lotName']] = [
+                    'price' => $item['lotPrice'],
+                    'description' => $item['lotDescription'],
+                ];
+            }
+
+            $result[$item['auctionName']]['lots'][$item['lotName']]['products'][] = [
+                'name' => $item['productName']
+            ];
+        }
+
+        return $result;
+    }
 }
