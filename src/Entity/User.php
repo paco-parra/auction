@@ -19,6 +19,11 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Bids", mappedBy="user", orphanRemoval=true)
+     **/
+    protected $bids;
+
     public function __toString()
     {
         return $this->getEmail();
@@ -29,4 +34,21 @@ class User extends BaseUser
         $this->setUsername($email);
         return parent::setEmail($email);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBids()
+    {
+        return $this->bids;
+    }
+
+    /**
+     * @param mixed $bids
+     */
+    public function setBids($bids): void
+    {
+        $this->bids = $bids;
+    }
+
 }

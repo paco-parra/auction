@@ -1,21 +1,5 @@
 services:
-  app.auction.manager:
-    class: App\Manager\AuctionManager
+  App\Manager\BaseManager:
     public: true
-    arguments: [App\Entity\Auction, "@doctrine.orm.entity_manager"]
-    tags:
-      - { name: 'app.auction.manager' }
-
-  app.lots.manager:
-    class: App\Manager\LotsManager
-    public: true
-    arguments: [App\Entity\Lots, "@doctrine.orm.entity_manager"]
-    tags:
-      - { name: 'app.lots.manager' }
-
-  app.products.manager:
-    class: App\Manager\ProductsManager
-    public: true
-    arguments: [App\Entity\Products, "@doctrine.orm.entity_manager"]
-    tags:
-      - { name: 'app.products.manager' }
+    arguments:
+      $entityManager: "@doctrine.orm.entity_manager"

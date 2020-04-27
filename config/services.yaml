@@ -28,3 +28,9 @@ services:
         class: App\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
+
+    App\Services\BidsService:
+        public: true
+        class: App\Services\BidsService
+
+    app.bids.service: '@App\Services\BidsService'

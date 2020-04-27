@@ -3,22 +3,20 @@ declare(strict_types=1);
 
 namespace App\Manager;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
-abstract class AbstractBaseManager
+class BaseManager
 {
-    protected $class;
     protected $entityManager;
 
-    public function __construct($class, EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->class = $class;
     }
 
-    public function create()
+    public function create($class)
     {
-        return new $this->class();
+        return new $class;
     }
 
     public function save($entity, $andFlush = true)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Model\Interfaces\AuctionInterface;
+use App\Model\Interfaces\BidsInterface;
 use App\Model\Interfaces\LotsInterface;
 use App\Model\Interfaces\ProductInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -54,6 +55,11 @@ class Lots implements LotsInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Products", mappedBy="lot", orphanRemoval=true)
      **/
     protected $products;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Bids", mappedBy="lot", orphanRemoval=true)
+     **/
+    protected $bids;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Auction", inversedBy="lots")
@@ -190,5 +196,37 @@ class Lots implements LotsInterface
     public function setAuction(AuctionInterface $auction): void
     {
         $this->auction = $auction;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBids() :? iterable
+    {
+        return $this->bids;
+    }
+
+    /**
+     * @param mixed $bids
+     */
+    public function setBids($bids): void
+    {
+        $this->bids = $bids;
+    }
+
+    public function addBids(BidsInterface $bids)
+    {
+        if (!$this->bids->contains($bids)) {
+            $this->bids->add($bids);
+        }
+
+        return $this;
+    }
+
+    public function removeBids(BidsInterface $bids = null)
+    {
+        if (!$this->bids->contains($bids)) {
+            $this->bids->removeElement($bids);
+        }
     }
 }
