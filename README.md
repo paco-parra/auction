@@ -1,6 +1,6 @@
 
 
-##Git repository
+## Git repository
 https://github.com/paco-parra/eactivos-test
 
 # INSTALLATION 
@@ -8,7 +8,7 @@ https://github.com/paco-parra/eactivos-test
 Add to etc/hosts
 127.0.0.1 local.eactivos.com
 
-###Install vendors 
+### Install vendors 
 
 ```bash
 composer install
@@ -21,20 +21,20 @@ cd docker
 docker-compose up -d
 ```
 
-###Build schema && run fixtures
+### Build schema && run fixtures
 
 ```bash
 * docker-compose run --rm docker-php-cli /var/www/bin/console doctrine:schema:update --force
 * docker-compose run --rm docker-php-cli /var/www/bin/console doctrine:fixtures:load
 ```
 
-###Run yarn build to compile assets
+### Run yarn build to compile assets
 
 ```bash
 docker-compose run --rm docker-encore yarn build 
 ```
 
-###Install assets for sonata admin
+### Install assets for sonata admin
 ```bash
 bin/console assets:install 
 ```
@@ -45,7 +45,7 @@ User: admin@admin.com
 Password: 12345
 
 # API ENDPOINTS
-###Register user
+### Register user
 ```bash
 curl -X POST \
    http://local.eactivos.com:8080/api/auth/register \
@@ -57,7 +57,7 @@ curl -X POST \
   }' 
 ```
 
-###Obtain token of administrator user (Necessary to obtain information from API)
+### Obtain token of administrator user (Necessary to obtain information from API)
 ```bash
 curl -X POST \
   http://local.eactivos.com:8080/api/auth/login \
@@ -68,7 +68,7 @@ curl -X POST \
 }'
 ```
 
-###Obtain all auctions, lots and bids
+### Obtain all auctions, lots and bids
 ```bash
 curl -X GET \
   http://local.eactivos.com:8080/api/v1/auctions/all \
@@ -76,7 +76,7 @@ curl -X GET \
   -H 'Content-Type: application/json' \
 ```
   
-###Obtain all users and their bids
+### Obtain all users and their bids
 ```bash
   curl -X GET \
     http://local.eactivos.com:8080/api/v1/users/all \
@@ -84,7 +84,7 @@ curl -X GET \
     -H 'Content-Type: application/json' \
 ```
 
-###Obtain all bids made by specific user
+### Obtain all bids made by specific user
 ```bash
 curl -X GET \
   http://local.eactivos.com:8080/api/v1/user/{user_id}/bids \
