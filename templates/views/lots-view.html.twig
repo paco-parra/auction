@@ -37,7 +37,9 @@
                         <p class="h3 mb-3">{{ 'lots_list.start_price'|trans }} {{ lot.initialPrice|number_format(0, ',', '.') }}€</p>
                     {% endif %}
                     <p class="h5 mb-3">{{ 'lot_view.expired_at'|trans }} {{ lot.auction.expiredAt|date('d/m/Y H:i:s') }}</p>
-                    <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#bidsModal">{{ 'lot_view.make_bid'|trans }}</button>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#bidsModal">{{ 'lot_view.make_bid'|trans }}</button>
+                    {% endif %}
                 </div>
             </div>
             <div class="row pt-5">
