@@ -36,12 +36,12 @@ de los productos que contiene.
 * Test de varias funciones de la plataforma con PHPUnit
 
 ## Git repository
-https://github.com/paco-parra/eactivos-test
+https://github.com/paco-parra/auction-test
 
 # INSTALLATION 
 
 Add to etc/hosts in localhost
-127.0.0.1 local.eactivos.com
+127.0.0.1 local.auction.com
 
 ### Install vendors 
 
@@ -75,7 +75,7 @@ bin/console assets:install
 ```
 
 #Access to Backoffice 
-http://local.eactivos.com:8080/admin/
+http://local.auction.com:8080/admin/
 User: admin@admin.com
 Password: 12345
 
@@ -83,7 +83,7 @@ Password: 12345
 ### Register user
 ```bash
 curl -X POST \
-   http://local.eactivos.com:8080/api/auth/register \
+   http://local.auction.com:8080/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username":"test@test.com",
@@ -95,7 +95,7 @@ curl -X POST \
 ### Obtain token of administrator user (Necessary to obtain information from API)
 ```bash
 curl -X POST \
-  http://local.eactivos.com:8080/api/auth/login \
+  http://local.auction.com:8080/api/auth/login \
   -H 'Content-Type: application/json' \
   -d '{
     "username": "admin@admin.com",
@@ -106,7 +106,7 @@ curl -X POST \
 ### Obtain all auctions, lots and bids
 ```bash
 curl -X GET \
-  http://local.eactivos.com:8080/api/v1/auctions/all \
+  http://local.auction.com:8080/api/v1/auctions/all \
   -H 'Authorization: Bearer {JWT_EY}' \
   -H 'Content-Type: application/json' \
 ```
@@ -114,7 +114,7 @@ curl -X GET \
 ### Obtain all users and their bids
 ```bash
   curl -X GET \
-    http://local.eactivos.com:8080/api/v1/users/all \
+    http://local.auction.com:8080/api/v1/users/all \
     -H 'Authorization: Bearer {JWT_EY}' \
     -H 'Content-Type: application/json' \
 ```
@@ -122,7 +122,7 @@ curl -X GET \
 ### Obtain all bids made by specific user
 ```bash
 curl -X GET \
-  http://local.eactivos.com:8080/api/v1/user/{user_id}/bids \
+  http://local.auction.com:8080/api/v1/user/{user_id}/bids \
   -H 'Authorization: Bearer {JWT_EY}' \
   -H 'Content-Type: application/json' \
 ```
